@@ -8,7 +8,6 @@ import time
 
 white = (255, 255, 255)
 
-buuletImg = pygame.image.load('bullets.png')
 
 pygame.init()
 # Font for text
@@ -51,7 +50,7 @@ def ternary(n):
     print("in the function : " +(s))
     ss = "".join(reversed(s))
     print("in the function : " + (ss))
-    return s
+    return ss
 
 
 # Arrange Cards Column-wise
@@ -351,9 +350,7 @@ class CardGame:
                         number_chosen = self.number_chosen
                         r, c = Index_Card_Image(Cards_27[number_chosen])
 
-
-
-                        self.CardSet.cards[r * 13 + c].rect.x += 70
+                        self.CardSet.cards[r * 13 + c].rect.x += 125
                         self.screen.fill(self.settings.bg_color)
 
 
@@ -373,19 +370,19 @@ class CardGame:
                 r, c = Index_Card_Image(column1[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 1)
                 pygame.display.flip()
-                time.sleep(0.01)
+                time.sleep(0.3)
 
                 # Column 2 Cards
                 r, c = Index_Card_Image(column2[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 2)
                 pygame.display.flip()
-                time.sleep(0.01)
+                time.sleep(0.3)
 
                 # Column 3 Cards
                 r, c = Index_Card_Image(column3[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 3)
                 pygame.display.flip()
-                time.sleep(0.01)
+                time.sleep(0.3)
 
         if self.step >= 4:
             print(1)
