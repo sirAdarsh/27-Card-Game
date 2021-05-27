@@ -1,89 +1,59 @@
 import pydealer
-from pydealer.const import BOTTOM
-import sys
 import pygame
-from settings import Settings
 
 
-#Deck of 52 Cards
-deck = pydealer.Deck()
-Cards_27 = deck.deal(27)
-
-#Lists for 3 Coloumns of cards
-column1 = []
-column2 = []
-column3 = []
-
-def initialize_deck():
-    deck.shuffle()
-    print("List of all 27 Cards:")
-    print(Cards_27)
+# Deck of 52 Cards
+decka = pydealer.Deck()
+deckb = pydealer.Deck()
 
 
-#Arrange Cards Column-wise
+# get the cards in two different stacks
 
-def arrange_cards_columnwise():
-    for i in range(9):
-        column1.append(Cards_27[i*3])
-        column2.append(Cards_27[i*3+1])
-        column3.append(Cards_27[i*3+2])
+def Index_Card_Image(value, suit):
 
-    print("Column 1:")
-    print(column1)
-    print("Column 2:")
-    print(column2)
-    print("Column 3:")
-    print(column3)
+    column = -1
+    row = -1
+    print(value)
+    print(suit)
+    if suit == "Spades":
+        row = 0
+    elif suit == "Diamonds":
+        row = 1
+    elif suit == "Hearts":
+        row = 2
+    elif suit == "Clubs":
+        row = 3
+    else:
+        row = -1
 
-    #Collect the cards Column-wise
-    Cards_27.empty()
-    #print("Empty Deck:")
-    print(Cards_27)
+    if value == "Ace":
+        column = 0
+    elif value == "Jack":
+        column = 10
+    elif value == "Queen":
+        column = 11
+    elif value == "King":
+        column = 12
+    else:
+        column = int(value) - 1
 
-    for i in range(9):
-        Cards_27.add(column1[i])
-    for i in range(9):
-        Cards_27.add(column2[i])
-    for i in range(9):
-        Cards_27.add(column3[i])
+    return row, column
 
-    print("After Rearrangment:")
-    print(Cards_27)
+l_cards = decka.get_list([0, 4, 8, 12, 16])
+r_cards = deckb.get_list([1, 5, 9, 13, 17])
 
+s = str(r_cards[0])
+x = s.split(" ")
 
-class CardGame:
-    """Overall class to manage Card Display."""
+r, c = Index_Card_Image(x[0], "Spades")
+print(r)
+print(c)
 
-    def __init__(self):
-        """Initialize the game, and create resources."""
-        pygame.init()
-        self.settings = Settings()
+s = str(l_cards[0])
+x = s.split(" ")
 
-        self.screen = pygame.display.set_mode(
-                (self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("27 Card Trick")
-
-    def run_game(self):
-        """Start the main loop for the game."""
-        while True:
-            self._check_events()
-            self._update_screen()
-
-    def _check_events(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    sys.exit()
-
-    def _update_screen(self):
-        self.screen.fill(self.settings.bg_color)
-        pygame.display.flip()   
-
-
-initialize_deck()
-arrange_cards_columnwise()
-CardDisplay = CardGame()
-CardDisplay.run_game()
+img = pygame.image.load()
+r, c = Index_Card_Image(x[0], x[2])
+print(r)
+print(c)
 

@@ -54,6 +54,13 @@ class Cards:
         self.rect.x = 300 + 300*(j-1)
         self.screen.blit(self.image, self.rect)
 
+    def blitmehere(self, pos_x, pos_y):
+        """Draw the card at position (x,y) on the screen"""
+        self.rect = self.image.get_rect()
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+        self.screen.blit(self.image, self.rect)
+
     def moveright(self):
         """Move the card to right."""
         self.rect = self.image.get_rect()
