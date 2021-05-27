@@ -52,7 +52,6 @@ print(c)
 s = str(l_cards[0])
 x = s.split(" ")
 
-img = pygame.image.load()
 r, c = Index_Card_Image(x[0], x[2])
 print(r)
 print(c)
