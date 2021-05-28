@@ -12,6 +12,7 @@ pygame.init()
 # Font for text
 font1 = pygame.font.Font('Fonts/Walkway_SemiBold.ttf', 32)
 font2 = pygame.font.Font('Fonts/Sansation-Bold.ttf', 40)
+font3 = pygame.font.Font('Fonts/Walkway_Oblique_Black.ttf', 20)
 
 # Deck of 52 Cards
 deck = pydealer.Deck()
@@ -22,6 +23,10 @@ Cards_27 = deck.deal(27)
 column1 = []
 column2 = []
 column3 = []
+
+col1 = []
+col2 = []
+col3 = []
 
 # Flag Variables for graphics events
 Arrange_cards_flag = False
@@ -59,8 +64,11 @@ def arrange_cards_columnwise(var, operation_number, series):
     if var == 0:
         for i in range(9):
             column1.append(Cards_27[i * 3])
+            col1.append(Cards_27[i * 3])
             column2.append(Cards_27[i * 3 + 1])
+            col2.append(Cards_27[i * 3 + 1])
             column3.append(Cards_27[i * 3 + 2])
+            col3.append(Cards_27[i * 3 + 2])
 
     # var = The chosen column
     operation_number -= 1
@@ -242,6 +250,7 @@ class Numbers(pygame.sprite.Sprite):
 number_group = pygame.sprite.Group()
 pos_x = 400
 pos_y = 60
+
 for i in range(27):
     if i != 0 and i % 3 == 0:
         pos_x = 400
@@ -302,7 +311,7 @@ class CardGame:
                         self.first_page_done = True
                         self.number_chosen = pos
                         self.chosen_number_ternary = ternary(self.number_chosen)
-                        self.screen.fill((0,0,0), (50, 400, 250, 50))
+                        self.screen.fill((0, 0, 0), (50, 400, 250, 50))
                         txt = font2.render("You Chose " + str(pos + 1), True, (255, 200, 110))
                         self.screen.blit(txt, (50, 400))
                         pygame.display.flip()
@@ -330,14 +339,15 @@ class CardGame:
                         # add another event listener
                         here = True
                         while here:
-                            txt = font1.render("Press any key to distribute the cards ", True, (255, 100, 0))
+                            txt = font1.render("Press any key to distribute the cards ", True, (255, 10, 20))
                             pygame.display.flip()
                             self.screen.blit(txt, (450, 600))
                             for event1 in pygame.event.get():
                                 if event1.type == pygame.KEYDOWN:
-                                    print("MILA")
                                     here = False
                                     break
+                                if event1.type == pygame.QUIT:
+                                    sys.exit()
 
                         # self.screen.fill(white)
                         pygame.display.flip()
@@ -352,14 +362,15 @@ class CardGame:
                         # add another event listener
                         here = True
                         while here:
-                            txt = font1.render("Press any key to distribute the cards ", True, (255, 100, 0))
+                            txt = font1.render("Press any key to distribute the cards ", True, (255, 10, 20))
                             pygame.display.flip()
                             self.screen.blit(txt, (450, 600))
                             for event1 in pygame.event.get():
                                 if event1.type == pygame.KEYDOWN:
-                                    print("MILA")
                                     here = False
                                     break
+                                if event1.type == pygame.QUIT:
+                                    sys.exit()
 
                         # self.screen.fill(white)
                         pygame.display.flip()
@@ -373,16 +384,16 @@ class CardGame:
                     # add another event listener
                     here = True
                     while here:
-                        txt = font1.render("Press any key to distribute the cards ", True, (255, 100, 0))
+                        txt = font1.render("Press any key to distribute the cards ", True, (255, 10, 20))
                         pygame.display.flip()
                         self.screen.blit(txt, (450, 600))
                         for event1 in pygame.event.get():
                             if event1.type == pygame.KEYDOWN:
-                                print("MILA")
                                 here = False
                                 break
+                            if event1.type == pygame.QUIT:
+                                sys.exit()
 
-                    # self.screen.fill(white)
                     pygame.display.flip()
                     self._update_screen()
                     self.step += 1
@@ -398,6 +409,10 @@ class CardGame:
 
                         self.CardSet.cards[r * 13 + c].screen.blit(self.CardSet.cards[r * 13 + c].image,
                                                                    self.CardSet.cards[r * 13 + c].rect)
+                        xx = self.CardSet.cards[r*13 + c].rect.x
+                        yy = self.CardSet.cards[r*13 + c].rect.y
+                        nm = font3.render(str(self.number_chosen + 1),True, (255,20,40))
+                        self.screen.blit(nm, (xx+40, yy-20))
                         self._update_screen()
                         pygame.display.flip()
 
@@ -412,32 +427,111 @@ class CardGame:
                 self.CardSet.cards[r * 13 + c].blitmehere(10, space)
                 space += 25
                 pygame.display.flip()
-                time.sleep(0.2)
+                time.sleep(0.01)
                 # TO_DO: add a part to remove the selected column
-            time.sleep(0.1)
-            self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
-            time.sleep(0.1)
+            time.sleep(0.01)
+            r_last, c_last = Index_Card_Image(Cards_27[8])
+
+            r_temp, c_temp = Index_Card_Image(col1[8])
+
+            # If first 9 cards is from column1
+
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
+                pygame.display.flip()
+
+            r_temp, c_temp = Index_Card_Image(col2[8])
+
+            # If first 9 cards is from column 2
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
+                pygame.display.flip()
+
+            r_temp, c_temp = Index_Card_Image(col3[8])
+
+            # If first 9 cards is from column 3
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
+                pygame.display.flip()
+
+            time.sleep(0.01)
             pygame.display.flip()
+
             for i in range(9, 18):
                 r, c = Index_Card_Image(Cards_27[i])
                 self.CardSet.cards[r * 13 + c].blitmehere(40, space)
                 space += 25
                 pygame.display.flip()
-                time.sleep(0.2)
-            time.sleep(0.1)
-            self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
-            time.sleep(0.1)
+                time.sleep(0.01)
+
+            time.sleep(0.01)
+            r_last, c_last = Index_Card_Image(Cards_27[17])
+
+            r_temp, c_temp = Index_Card_Image(col1[8])
+
+            # If first 9 cards is from column 1
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
+                pygame.display.flip()
+
+            r_temp, c_temp = Index_Card_Image(col2[8])
+
+            # If first 9 cards is from column 2
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
+                pygame.display.flip()
+
+            r_temp, c_temp = Index_Card_Image(col3[8])
+
+            # If first 9 cards is from column 3
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
+                pygame.display.flip()
+
+            time.sleep(0.01)
             pygame.display.flip()
+
             for i in range(18, 27):
                 r, c = Index_Card_Image(Cards_27[i])
                 self.CardSet.cards[r * 13 + c].blitmehere(10, space)
                 space += 25
                 pygame.display.flip()
-                time.sleep(0.2)
-                time.sleep(0.1)
-            self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
-            pygame.display.flip()
-            time.sleep(0.1)
+                time.sleep(0.01)
+
+            time.sleep(0.01)
+            r_last, c_last = Index_Card_Image(Cards_27[26])
+
+            r_temp, c_temp = Index_Card_Image(col1[8])
+
+            # If first 9 cards is from column 1
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
+                pygame.display.flip()
+
+            r_temp, c_temp = Index_Card_Image(col2[8])
+
+            # If first 9 cards is from column 2
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
+                pygame.display.flip()
+
+            r_temp, c_temp = Index_Card_Image(col3[8])
+
+            # If first 9 cards is from column 3
+            if r_temp == r_last and c_temp == c_last:
+                self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
+                pygame.display.flip()
+
+            col1.clear()
+            col2.clear()
+            col3.clear()
+
+            for i in range(9):
+                col1.append(column1[i])
+                col2.append(column2[i])
+                col3.append(column3[i])
+
+            time.sleep(0.01)
 
     def _update_screen(self):
         # Display cards
@@ -445,7 +539,6 @@ class CardGame:
 
             self.screen.fill(self.settings.bg_color, pygame.Rect(200, 0, 1000, 800))
             pygame.display.flip()
-            # time.sleep(22)
             y = 0
 
             for var in range(9):
@@ -457,7 +550,7 @@ class CardGame:
                 r, c = Index_Card_Image(column1[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 1)
                 pygame.display.flip()
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 # Column 2 Cards
                 y += 25
@@ -466,7 +559,7 @@ class CardGame:
                 r, c = Index_Card_Image(column2[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 2)
                 pygame.display.flip()
-                time.sleep(0.5)
+                time.sleep(0.1)
 
                 if var == 2:
                     self.screen.fill((0, 0, 0), pygame.Rect(0, 0, 40, y + 180))
@@ -485,36 +578,54 @@ class CardGame:
                 r, c = Index_Card_Image(column3[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 3)
                 pygame.display.flip()
-                time.sleep(0.5)
+                time.sleep(0.1)
 
         if self.step >= 4:
             print(1)
+
+            x = 250
+            y = 25
+
             for var in range(9):
                 # Column 1 Cards
 
                 r, c = Index_Card_Image(column1[var])
                 ok = True
+
+
                 if (3 * var) == self.number_chosen:
                     ok = False
                 if ok:
                     self.CardSet.cards[r * 13 + c].blitme(var, 1)
+                    num = font3.render(str(var * 3 + 1), True, (0, 0, 0))
+                    self.screen.blit(num, (x, y))
 
                 # Column 2 Cards
                 r, c = Index_Card_Image(column2[var])
                 ok = True
+
+                x += 300
                 if (3 * var + 1) == self.number_chosen:
                     ok = False
                 if ok:
                     self.CardSet.cards[r * 13 + c].blitme(var, 2)
+                    num = font3.render(str(var * 3 + 2), True, (0, 0, 0))
+                    self.screen.blit(num, (x, y))
 
                 # Column 3 Cards
                 r, c = Index_Card_Image(column3[var])
                 ok = True
+
+                x += 300
                 if (3 * var + 2) == self.number_chosen:
                     ok = False
                 if ok:
                     self.CardSet.cards[r * 13 + c].blitme(var, 3)
+                    num = font3.render(str(var * 3 + 3), True, (0, 0, 0))
+                    self.screen.blit(num, (x, y))
                 pygame.display.flip()
+                x = 250
+                y += 50
 
 
 CardDisplay = CardGame()
