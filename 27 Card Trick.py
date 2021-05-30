@@ -269,6 +269,10 @@ class CardGame:
     first_page_done = False
     number_chosen = 0
 
+    first_column = 0
+    second_column = 0
+    third_column = 0
+
     chosen_number_ternary = ''
 
     def __init__(self):
@@ -422,105 +426,135 @@ class CardGame:
 
         if self.step > 0:
 
-            for i in range(9):
-                r, c = Index_Card_Image(Cards_27[i])
-                self.CardSet.cards[r * 13 + c].blitmehere(10, space)
-                space += 25
-                pygame.display.flip()
-                time.sleep(0.01)
-                # TO_DO: add a part to remove the selected column
-            time.sleep(0.01)
+
+
+        #FIRST COLUMN DETECTION
             r_last, c_last = Index_Card_Image(Cards_27[8])
-
             r_temp, c_temp = Index_Card_Image(col1[8])
-
             # If first 9 cards is from column1
-
             if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
-                pygame.display.flip()
+                self.first_column = 1
+            r_temp, c_temp = Index_Card_Image(col2[8])
+            # If first 9 cards is from column 2
+            if r_temp == r_last and c_temp == c_last:
+                self.first_column = 2
+            r_temp, c_temp = Index_Card_Image(col3[8])
+            # If first 9 cards is from column 3
+            if r_temp == r_last and c_temp == c_last:
+                self.first_column = 3
+
+        #SECOND COLUMN DETECTION
+            r_last, c_last = Index_Card_Image(Cards_27[17])
+            r_temp, c_temp = Index_Card_Image(col1[8])
+            # If first 9 cards is from column 1
+            if r_temp == r_last and c_temp == c_last:
+                self.second_column = 1
+            r_temp, c_temp = Index_Card_Image(col2[8])
+            # If first 9 cards is from column 2
+            if r_temp == r_last and c_temp == c_last:
+                self.second_column = 2
+            r_temp, c_temp = Index_Card_Image(col3[8])
+            # If first 9 cards is from column 3
+            if r_temp == r_last and c_temp == c_last:
+                self.second_column = 3
+
+        #THIRD COLUMN DETECTION
+            r_last, c_last = Index_Card_Image(Cards_27[26])
+            r_temp, c_temp = Index_Card_Image(col1[8])
+            # If first 9 cards is from column 1
+            if r_temp == r_last and c_temp == c_last:
+                self.third_column = 1
 
             r_temp, c_temp = Index_Card_Image(col2[8])
 
             # If first 9 cards is from column 2
             if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
-                pygame.display.flip()
+                self.third_column = 2
 
             r_temp, c_temp = Index_Card_Image(col3[8])
 
             # If first 9 cards is from column 3
             if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
+                self.third_column = 3
+
+            x_first = 300
+            x_second = 600
+            x_third = 900
+            del_y = 50
+
+            if self.first_column == 1:
+                x = x_first
+            elif self.second_column == 1:
+                x = x_second
+            else:
+                x = x_third
+            for i in range(9):
+
+                time.sleep(0.2)
+                self.screen.fill(self.settings.bg_color, pygame.Rect(x, 20, 100, del_y))
+                del_y += 50
+                if i == 7:
+                    del_y += 400
+                r, c = Index_Card_Image(Cards_27[i])
+                self.CardSet.cards[r * 13 + c].blitmehere(10, space)
+                space += 25
                 pygame.display.flip()
 
-            time.sleep(0.01)
+                # TO_DO: add a part to remove the selected column
+            time.sleep(0.2)
+
+
+            time.sleep(0.2)
             pygame.display.flip()
 
+            if self.first_column == 2:
+                x = x_first
+            elif self.second_column == 2:
+                x = x_second
+            else:
+                 x = x_third
+            del_y = 50
             for i in range(9, 18):
+
+                time.sleep(0.2)
+                self.screen.fill(self.settings.bg_color, pygame.Rect(x, 20, 100, del_y))
+                time.sleep(0.2)
+                del_y += 50
+                if i == 16:
+                    del_y += 300
                 r, c = Index_Card_Image(Cards_27[i])
                 self.CardSet.cards[r * 13 + c].blitmehere(40, space)
                 space += 25
                 pygame.display.flip()
-                time.sleep(0.01)
 
-            time.sleep(0.01)
-            r_last, c_last = Index_Card_Image(Cards_27[17])
+            time.sleep(0.2)
 
-            r_temp, c_temp = Index_Card_Image(col1[8])
 
-            # If first 9 cards is from column 1
-            if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
-                pygame.display.flip()
-
-            r_temp, c_temp = Index_Card_Image(col2[8])
-
-            # If first 9 cards is from column 2
-            if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
-                pygame.display.flip()
-
-            r_temp, c_temp = Index_Card_Image(col3[8])
-
-            # If first 9 cards is from column 3
-            if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
-                pygame.display.flip()
-
-            time.sleep(0.01)
+            time.sleep(0.2)
             pygame.display.flip()
 
+            del_y = 50
+            if self.first_column == 3:
+                x = x_first
+            elif self.second_column == 3:
+                x = x_second
+            else:
+                x = x_third
             for i in range(18, 27):
+                time.sleep(0.2)
+                self.screen.fill(self.settings.bg_color, pygame.Rect(x, 20, 100, del_y))
+                time.sleep(0.2)
+                del_y += 50
+                if i == 25:
+                    del_y += 300
                 r, c = Index_Card_Image(Cards_27[i])
                 self.CardSet.cards[r * 13 + c].blitmehere(10, space)
                 space += 25
                 pygame.display.flip()
-                time.sleep(0.01)
+                time.sleep(0.2)
 
-            time.sleep(0.01)
-            r_last, c_last = Index_Card_Image(Cards_27[26])
+            time.sleep(0.2)
 
-            r_temp, c_temp = Index_Card_Image(col1[8])
-
-            # If first 9 cards is from column 1
-            if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(300, 0, 100, 1200))
-                pygame.display.flip()
-
-            r_temp, c_temp = Index_Card_Image(col2[8])
-
-            # If first 9 cards is from column 2
-            if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(600, 0, 100, 1100))
-                pygame.display.flip()
-
-            r_temp, c_temp = Index_Card_Image(col3[8])
-
-            # If first 9 cards is from column 3
-            if r_temp == r_last and c_temp == c_last:
-                self.screen.fill(self.settings.bg_color, pygame.Rect(900, 0, 100, 1100))
-                pygame.display.flip()
 
             col1.clear()
             col2.clear()
@@ -531,7 +565,7 @@ class CardGame:
                 col2.append(column2[i])
                 col3.append(column3[i])
 
-            time.sleep(0.01)
+            time.sleep(0.2)
 
     def _update_screen(self):
         # Display cards
@@ -550,7 +584,7 @@ class CardGame:
                 r, c = Index_Card_Image(column1[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 1)
                 pygame.display.flip()
-                time.sleep(0.1)
+                time.sleep(0.5)
 
                 # Column 2 Cards
                 y += 25
@@ -559,7 +593,7 @@ class CardGame:
                 r, c = Index_Card_Image(column2[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 2)
                 pygame.display.flip()
-                time.sleep(0.1)
+                time.sleep(0.5)
 
                 if var == 2:
                     self.screen.fill((0, 0, 0), pygame.Rect(0, 0, 40, y + 180))
@@ -578,7 +612,7 @@ class CardGame:
                 r, c = Index_Card_Image(column3[var])
                 self.CardSet.cards[r * 13 + c].blitme(var, 3)
                 pygame.display.flip()
-                time.sleep(0.1)
+                time.sleep(0.5)
 
         if self.step >= 4:
             print(1)

@@ -101,6 +101,8 @@ class CardGame:
                 # When pressed Enter, the card display starts
                 elif event.key == pygame.K_KP_ENTER:
                     if self.step == 0:
+                        print("HERE ------ ")
+                        print(l_cards)
                         self._update_screen(l_cards)
                         self.step += 1
                 elif event.key == pygame.K_RCTRL:
@@ -110,21 +112,12 @@ class CardGame:
 
                 elif event.key == pygame.K_LEFT:
                     if self.step == 2:
-
                         n_cards = rotate(l_cards, 1)
-
-                        print(l_cards[0])
-                        l_cards.clear()
-                        for i in range(len(n_cards)):
-                            l_cards.append(n_cards[i])
                         self._update_screen(n_cards)
 
                 elif event.key == pygame.K_RIGHT:
                     if self.step == 2:
                         n_cards = rotate(rr_cards, 1)
-                        rr_cards.clear()
-                        for i in range(len(n_cards)):
-                            rr_cards.append(n_cards[i])
                         self._update_screen(n_cards)
 
     def _update_screen(self, n_cards):
