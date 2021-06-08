@@ -12,7 +12,7 @@ pygame.init()
 # Font for text
 font1 = pygame.font.Font('Fonts/Walkway_SemiBold.ttf', 32)
 font2 = pygame.font.Font('Fonts/Sansation-Bold.ttf', 40)
-font3 = pygame.font.Font('Fonts/Walkway_Oblique_Black.ttf', 20)
+font3 = pygame.font.Font('Fonts/Walkway_Oblique_Black.ttf', 45)
 
 # Deck of 52 Cards
 deck = pydealer.Deck()
@@ -542,7 +542,7 @@ class CardGame:
                 time.sleep(0.01)
 
         if self.step == 4:
-            print(1)
+            print('YE WALA')
             done = False
             # self.screen.fill(self.settings.bg_color)
 
@@ -554,7 +554,7 @@ class CardGame:
 
         if self.step > 4:
 
-            time.sleep(3)
+            time.sleep(2)
             self.draw_cards(self.stacks)
 
             time.sleep(2)
@@ -563,11 +563,11 @@ class CardGame:
             selects = []
 
             pygame.display.flip()
-            x = 100
-            y = 100
+            x = 200
+            y = 750
 
             # SELECT 5 CARD STACKS
-            while (True):
+            while True:
                 to_break = False
 
                 for event in pygame.event.get():
@@ -629,6 +629,18 @@ class CardGame:
                 if to_break:
                     break
 
+            while True:
+                to_break = False
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.QUIT:
+                            sys.exit()
+                        if event.key == pygame.K_KP_ENTER:
+                            to_break = True
+                            break
+                if to_break:
+                    break
+
             # we have made 5 selections now, ALSO CARD IS IN STACK - 5
 
 
@@ -655,7 +667,7 @@ class CardGame:
                     if selects[i] != 5:
                         new_stack.append(self.stacks[selects[i] - 1])
 
-                time.sleep(4)
+                time.sleep(2)
                 for i in range(len(nums)):
                     print(self.map_cards[nums[i] - 1][0])
                     print(self.map_cards[nums[i] - 1][1])
@@ -664,7 +676,7 @@ class CardGame:
                     pygame.display.flip()
                     time.sleep(1)
 
-                time.sleep(5)
+                time.sleep(2)
 
                 self.stacks.clear()
                 for i in range(len(new_stack)):
@@ -677,6 +689,8 @@ class CardGame:
                 # Again, select 3 card stacks3
                 # SELECT 3 CARD STACKS
                 selects.clear()
+                x = 200
+                y = 750
                 while (True):
                     to_break = False
 
@@ -739,6 +753,20 @@ class CardGame:
                     if to_break:
                         break
 
+                while True:
+                    to_break = False
+                    for event in pygame.event.get():
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.QUIT:
+                                sys.exit()
+                            if event.key == pygame.K_KP_ENTER:
+                                to_break = True
+                                break
+                    if to_break:
+                        break
+
+                        # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                 stack_selected = False
 
                 for i in range(len(selects)):
@@ -784,6 +812,8 @@ class CardGame:
                     # SELECT 2 CARD STACKS
 
                     selects.clear()
+                    x = 200
+                    y = 750
                     while (True):
                         to_break = False
 
@@ -846,6 +876,20 @@ class CardGame:
                         if to_break:
                             break
 
+                    while True:
+                        to_break = False
+                        for event in pygame.event.get():
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.QUIT:
+                                    sys.exit()
+                                if event.key == pygame.K_KP_ENTER:
+                                    to_break = True
+                                    break
+                        if to_break:
+                            break
+
+                            # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                     stack_selected = False
 
                     for i in range(len(selects)):
@@ -875,7 +919,7 @@ class CardGame:
                             pygame.display.flip()
                             time.sleep(1)
 
-                        time.sleep(5)
+                        time.sleep(2)
 
                         self.stacks.clear()
                         for i in range(len(new_stack)):
@@ -889,7 +933,9 @@ class CardGame:
                         # SELECT 1 CARD STACKS
 
                         selects.clear()
-                        while (True):
+                        x = 200
+                        y = 750
+                        while True:
                             to_break = False
 
                             for event in pygame.event.get():
@@ -951,6 +997,20 @@ class CardGame:
                             if to_break:
                                 break
 
+                        while True:
+                            to_break = False
+                            for event in pygame.event.get():
+                                if event.type == pygame.KEYDOWN:
+                                    if event.key == pygame.QUIT:
+                                        sys.exit()
+                                    if event.key == pygame.K_KP_ENTER:
+                                        to_break = True
+                                        break
+                            if to_break:
+                                break
+
+                                # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                         stack_selected = False
 
                         for i in range(len(selects)):
@@ -980,7 +1040,7 @@ class CardGame:
                                 pygame.display.flip()
                                 time.sleep(1)
 
-                            time.sleep(5)
+                            time.sleep(2)
 
                             self.stacks.clear()
                             for i in range(len(new_stack)):
@@ -989,7 +1049,7 @@ class CardGame:
                             self.screen.fill(self.settings.bg_color)
                             pygame.display.flip()
                             self.draw_cards(new_stack)
-                            time.sleep(4)
+                            time.sleep(2)
 
                         else:
 
@@ -1003,7 +1063,7 @@ class CardGame:
                             self.screen.fill(self.settings.bg_color)
                             pygame.display.flip()
                             self.draw_cards(self.stacks)
-                            time.sleep(4)
+                            time.sleep(2)
 
                     else:
                         print("remaining 1")
@@ -1018,7 +1078,7 @@ class CardGame:
                         self.screen.fill(self.settings.bg_color)
                         pygame.display.flip()
                         self.draw_cards(self.stacks)
-                        time.sleep(5)
+                        time.sleep(2)
                         # NOW WE HAVE JUST ONE CARD REMAINING, WHICH IS THE REQUIRED STACK!!
 
                 # If the selected 3 card stacks are not the desired set, DISPLAY remaining 2
@@ -1051,6 +1111,9 @@ class CardGame:
                     # SELECT 1 CARD STACKS
 
                     selects.clear()
+                    x = 200
+                    y = 750
+
                     while (True):
                         to_break = False
 
@@ -1113,6 +1176,20 @@ class CardGame:
                         if to_break:
                             break
 
+                    while True:
+                        to_break = False
+                        for event in pygame.event.get():
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.QUIT:
+                                    sys.exit()
+                                if event.key == pygame.K_KP_ENTER:
+                                    to_break = True
+                                    break
+                        if to_break:
+                            break
+
+                            # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                     stack_selected = False
 
                     for i in range(len(selects)):
@@ -1136,7 +1213,7 @@ class CardGame:
                         self.screen.fill(self.settings.bg_color)
                         pygame.display.flip()
                         self.draw_cards(new_stack)
-                        time.sleep(4)
+                        time.sleep(2)
 
                     else:
                         # THIS IS THE FINAL STACK, DISPLY IT!
@@ -1150,13 +1227,27 @@ class CardGame:
                         time.sleep(2)
                         pygame.display.flip()
                         self.draw_cards(self.stacks)
-                        time.sleep(4)
+                        time.sleep(2)
 
             else:
+                tmp = self.stacks[5-1]
+
                 j = 0
                 for i in range(len(selects)):
                     self.stacks.pop(selects[i] - 1 - j)
                     j += 1
+
+                tmp_stacks = []
+                tmp_stacks.append(tmp)
+                for stack in self.stacks:
+                    if stack!=tmp:
+                        tmp_stacks.append(stack)
+
+                self.stacks.clear()
+
+                for stack in tmp_stacks:
+                    self.stacks.append(stack)
+
                 print("size - " + str(len(self.stacks)))
 
                 for i in range(len(selects)):
@@ -1172,7 +1263,7 @@ class CardGame:
                 self.screen.fill(self.settings.bg_color)
                 pygame.display.flip()
                 self.draw_cards(self.stacks)
-                time.sleep(10)
+                time.sleep(2)
                 # NOW WE HAVE 4 CARDS REMAINING
 
                 # ASK TO SELECT 3 cards and so on...
@@ -1181,6 +1272,8 @@ class CardGame:
                 # SELECT 2 CARD STACKS
 
                 selects.clear()
+                x = 200
+                y= 750
                 while (True):
                     to_break = False
 
@@ -1243,6 +1336,20 @@ class CardGame:
                     if to_break:
                         break
 
+                while True:
+                    to_break = False
+                    for event in pygame.event.get():
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.QUIT:
+                                sys.exit()
+                            if event.key == pygame.K_KP_ENTER:
+                                to_break = True
+                                break
+                    if to_break:
+                        break
+
+                        # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                 stack_selected = False
 
                 for i in range(len(selects)):
@@ -1255,10 +1362,25 @@ class CardGame:
                     # display the selected stacks only
 
                     new_stack = []
+                    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
                     new_stack.append(self.stacks[1 - 1])
+
+                    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
                     for i in range(len(selects)):
+                        nums.remove(selects[i])
                         if selects[i] != 1:
                             new_stack.append(self.stacks[selects[i] - 1])
+
+                    for i in range(len(nums)):
+                        print(self.map_cards[nums[i] - 1][0])
+                        print(self.map_cards[nums[i] - 1][1])
+                        pygame.display.flip()
+                        self.screen.fill(self.settings.bg_color,
+                                         pygame.Rect(self.map_cards[nums[i] - 1][0],
+                                                     self.map_cards[nums[i] - 1][1],
+                                                     100, 220))
+                        pygame.display.flip()
+                        time.sleep(1)
 
                     self.stacks.clear()
                     for i in range(len(new_stack)):
@@ -1272,6 +1394,8 @@ class CardGame:
                     # SELECT 1 CARD STACKS
 
                     selects.clear()
+                    x = 200
+                    y = 750
                     while (True):
                         to_break = False
 
@@ -1334,6 +1458,20 @@ class CardGame:
                         if to_break:
                             break
 
+                    while True:
+                        to_break = False
+                        for event in pygame.event.get():
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.QUIT:
+                                    sys.exit()
+                                if event.key == pygame.K_KP_ENTER:
+                                    to_break = True
+                                    break
+                        if to_break:
+                            break
+
+                            # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                     stack_selected = False
 
                     for i in range(len(selects)):
@@ -1357,7 +1495,7 @@ class CardGame:
                         self.screen.fill(self.settings.bg_color)
                         pygame.display.flip()
                         self.draw_cards(new_stack)
-                        time.sleep(4)
+                        time.sleep(2)
 
                     else:
 
@@ -1383,10 +1521,22 @@ class CardGame:
                         self.screen.fill(self.settings.bg_color)
                         pygame.display.flip()
                         self.draw_cards(self.stacks)
-                        time.sleep(4)
+                        time.sleep(2)
 
                 else:
-                    print("remaining 1")
+
+                    for i in range(len(selects)):
+                        print(self.map_cards[selects[i] - 1][0])
+                        print(self.map_cards[selects[i] - 1][1])
+                        pygame.display.flip()
+                        self.screen.fill(self.settings.bg_color,
+                                         pygame.Rect(self.map_cards[selects[i] - 1][0],
+                                                     self.map_cards[selects[i] - 1][1],
+                                                     100, 220))
+                        pygame.display.flip()
+                        time.sleep(1)
+
+                    time.sleep(2)
                     print(len(self.stacks))
                     # Display remaining 1 cards
                     # Pop out the selected card stacks
@@ -1399,7 +1549,142 @@ class CardGame:
                     self.screen.fill(self.settings.bg_color)
                     pygame.display.flip()
                     self.draw_cards(self.stacks)
-                    time.sleep(5)
+                    time.sleep(2)
+
+                    #HERE TWO CARDS ARE GETTING DISPLAYED, ASK TO CHOOSE ONE
+
+
+                    selects.clear()
+                    x = 200
+                    y = 750
+                    while (True):
+                        to_break = False
+
+                        for event in pygame.event.get():
+                            if event.type == pygame.KEYDOWN:
+                                if event.type == pygame.QUIT:
+                                    sys.exit()
+
+                                if event.key == pygame.K_1:
+                                    selects.append(1)
+                                    txt = font3.render(str(1), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_2:
+                                    selects.append(2)
+                                    txt = font3.render(str(2), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_3:
+                                    selects.append(3)
+                                    txt = font3.render(str(3), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_4:
+                                    selects.append(4)
+                                    txt = font3.render(str(4), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_5:
+                                    selects.append(5)
+                                    txt = font3.render(str(5), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_6:
+                                    selects.append(6)
+                                    txt = font3.render(str(6), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_7:
+                                    selects.append(7)
+                                    txt = font3.render(str(7), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_8:
+                                    selects.append(8)
+                                    txt = font3.render(str(8), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                elif event.key == pygame.K_9:
+                                    selects.append(9)
+                                    txt = font3.render(str(9), True, (255, 0, 0))
+                                    self.screen.blit(txt, (x, y))
+                                    pygame.display.flip()
+                                print(len(selects))
+                                x += 100
+                            if len(selects) == 1:
+                                to_break = True
+                                break
+
+                        if to_break:
+                            break
+
+                    while True:
+                        to_break = False
+                        for event in pygame.event.get():
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.QUIT:
+                                    sys.exit()
+                                if event.key == pygame.K_KP_ENTER:
+                                    to_break = True
+                                    break
+                        if to_break:
+                            break
+
+                            # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
+                    stack_selected = False
+
+                    for i in range(len(selects)):
+                        if selects[i] == 1:
+                            stack_selected = True
+
+                    # 2 CARDS REMAINING
+                    if stack_selected:
+
+                        new_stack = []
+                        # THIS IS THE FINAL STACK, DISPLY IT!
+                        new_stack.append(self.stacks[1 - 1])
+                        for i in range(len(selects)):
+                            if selects[i] != 1:
+                                new_stack.append(self.stacks[selects[i] - 1])
+
+                        self.stacks.clear()
+                        for i in range(len(new_stack)):
+                            self.stacks.append(new_stack[i])
+
+                        self.screen.fill(self.settings.bg_color)
+                        pygame.display.flip()
+                        self.draw_cards(new_stack)
+                        time.sleep(2)
+
+                    else:
+
+                        # THIS IS THE FINAL STACK, DISPLY IT!
+                        print("CHECK ")
+                        # Display the other card deck
+                        print("size - " + str(len(self.stacks)))
+                        for i in range(len(selects)):
+                            self.stacks.pop(selects[i] - 1)
+                        print("size - " + str(len(self.stacks)))
+
+                        for i in range(len(selects)):
+                            print(self.map_cards[selects[i] - 1][0])
+                            print(self.map_cards[selects[i] - 1][1])
+                            pygame.display.flip()
+                            self.screen.fill(self.settings.bg_color,
+                                             pygame.Rect(self.map_cards[selects[i] - 1][0],
+                                                         self.map_cards[selects[i] - 1][1],
+                                                         100, 220))
+                            pygame.display.flip()
+                            time.sleep(1)
+
+                        self.screen.fill(self.settings.bg_color)
+                        pygame.display.flip()
+                        self.draw_cards(self.stacks)
+                        time.sleep(2)
+
+
                     # NOW WE HAVE JUST ONE CARD REMAINING, WHICH IS THE REQUIRED STACK!!
 
 
