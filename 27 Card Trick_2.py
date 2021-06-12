@@ -383,6 +383,10 @@ class CardGame:
         x = 200
         y = 750
 
+        txt = font1.render("Select any 1 card ", True, (255, 10, 20))
+        pygame.display.flip()
+        self.screen.blit(txt, (450, 600))
+
         while (True):
             to_break = False
 
@@ -477,6 +481,10 @@ class CardGame:
                                 break
                     if to_break:
                         break
+                txt = font1.render("Your Final card is : ", True, (255, 10, 20))
+                pygame.display.flip()
+                self.screen.blit(txt, (500, 50))
+
                 r, c = Index_Card_Image(stack[1])
                 self.CardSet.cards[r * 13 + c].blitmehere(400, 100)
             else:
@@ -508,6 +516,10 @@ class CardGame:
 
             selects.clear()
 
+            txt = font1.render("Select any 1 card  ", True, (255, 10, 20))
+            pygame.display.flip()
+            self.screen.blit(txt, (450, 600))
+
             while (True):
                 to_break = False
 
@@ -602,6 +614,10 @@ class CardGame:
                                 break
                     if to_break:
                         break
+                txt = font1.render("Your Final card is : ", True, (255, 10, 20))
+                pygame.display.flip()
+                self.screen.blit(txt, (500, 50))
+
                 r, c = Index_Card_Image(stack[1])
                 self.CardSet.cards[r * 13 + c].blitmehere(400, 100)
             else:
@@ -631,6 +647,10 @@ class CardGame:
 
             selects.clear()
 
+            txt = font1.render("Select any 1 card ", True, (255, 10, 20))
+            pygame.display.flip()
+            self.screen.blit(txt, (450, 600))
+
             while (True):
                 to_break = False
 
@@ -724,6 +744,9 @@ class CardGame:
                                 break
                     if to_break:
                         break
+                txt = font1.render("Your Final card is : ", True, (255, 10, 20))
+                pygame.display.flip()
+                self.screen.blit(txt, (500, 50))
                 r, c = Index_Card_Image(stack[1])
                 self.CardSet.cards[r * 13 + c].blitmehere(400, 100)
             else:
@@ -1014,6 +1037,10 @@ class CardGame:
             y = 750
 
             # SELECT 5 CARD STACKS
+            txt = font1.render("Select any 5 card ", True, (255, 10, 20))
+            self.screen.blit(txt, (700, 750))
+            pygame.display.flip()
+
             while True:
                 to_break = False
 
@@ -1142,6 +1169,9 @@ class CardGame:
                 selects.clear()
                 x = 200
                 y = 750
+                txt = font1.render("Select any 3 card ", True, (255, 10, 20))
+                self.screen.blit(txt, (700, 750))
+                pygame.display.flip()
                 while (True):
                     to_break = False
 
@@ -1268,6 +1298,9 @@ class CardGame:
                     selects.clear()
                     x = 200
                     y = 750
+                    txt = font1.render("Select any 2 card ", True, (255, 10, 20))
+                    self.screen.blit(txt, (700, 750))
+                    pygame.display.flip()
                     while (True):
                         to_break = False
 
@@ -1392,6 +1425,9 @@ class CardGame:
                         selects.clear()
                         x = 200
                         y = 750
+                        txt = font1.render("Select any 1 card ", True, (255, 10, 20))
+                        self.screen.blit(txt, (700, 750))
+                        pygame.display.flip()
                         while True:
                             to_break = False
 
@@ -1581,6 +1617,9 @@ class CardGame:
                     x = 200
                     y = 750
 
+                    txt = font1.render("Select any 1 card ", True, (255, 10, 20))
+                    self.screen.blit(txt, (700, 750))
+                    pygame.display.flip()
                     while (True):
                         to_break = False
 
@@ -1747,6 +1786,9 @@ class CardGame:
                 selects.clear()
                 x = 200
                 y = 750
+                txt = font1.render("Select any 2 card ", True, (255, 10, 20))
+                self.screen.blit(txt, (700, 750))
+                pygame.display.flip()
                 while (True):
                     to_break = False
 
@@ -1872,6 +1914,9 @@ class CardGame:
                     selects.clear()
                     x = 200
                     y = 750
+                    txt = font1.render("Select any 1 card ", True, (255, 10, 20))
+                    self.screen.blit(txt, (700, 750))
+                    pygame.display.flip()
                     while (True):
                         to_break = False
 
@@ -2034,6 +2079,10 @@ class CardGame:
                     selects.clear()
                     x = 200
                     y = 750
+
+                    txt = font1.render("Select any 1 card ", True, (255, 10, 20))
+                    self.screen.blit(txt, (700, 750))
+                    pygame.display.flip()
                     while (True):
                         to_break = False
 
