@@ -59,8 +59,8 @@ class CardGame:
     side_x = 0
     side_y = 0
 
-    draws = [(200, 20), (400, 20), (600, 20), (800, 20), (1000, 20), (200, 320), (400, 320), (600, 320), (800, 320),
-             (1000, 320), (200, 520), (
+    draws = [(300, 20), (500, 20), (700, 20), (900, 20), (1100, 20), (300, 340), (500, 340), (700, 340), (900, 340),
+             (1100, 340), (200, 620), (
                  400, 620), (600, 620), (800, 620), (1000, 620)]
 
     total_stacks_made = 0
@@ -90,6 +90,14 @@ class CardGame:
                     self.step += 1
                     self.update_screen()
 
+    def card_transition(self, Card, init_x, init_y):
+        r, c = Index_Card_Image(Card)
+        self.CardSet.cards[r * 13 + c].blitmehere(init_x+120, init_y)
+        pygame.display.flip()
+        time.sleep(0.5)
+        self.screen.fill(self.settings.bg_color, (init_x+120, init_y, 100, 300))
+        pygame.display.flip()
+
     def update_screen(self):
         if self.step == 1:
             # display 52 cards on top left
@@ -97,7 +105,7 @@ class CardGame:
             y = 10
             index = 0
             self.screen.fill(self.settings.bg_color)
-            time.sleep(0.1)
+            time.sleep(0.5)
             pygame.display.flip()
 
             for i in range(52):
@@ -133,8 +141,11 @@ class CardGame:
                     temp_stack = []
 
                     print(i)
-                    time.sleep(0.1)
+                    time.sleep(0.4)
                     x, y = self.draws[stacks]
+
+                    minimum_y = y
+
                     print(x)
                     for j in range(num_on_card, 14):
 
@@ -147,12 +158,13 @@ class CardGame:
                             txt = font3.render('Insufficient Cards for the stack', True, (255, 0, 0))
                             self.screen.blit(txt, (400, 700))
                             pygame.display.flip()
-                            time.sleep(0.1)
+                            time.sleep(0.4)
                             # display this set of cards on the left, unflipped
-                            self.screen.fill(self.settings.bg_color, (x, y - 100, 200, 300))
+
+                            self.screen.fill(self.settings.bg_color, (x, minimum_y, 200, 500))
                             pygame.display.flip()
                             print("HERE?")
-                            time.sleep(0.1)
+                            time.sleep(0.4)
                             # display on left
                             self.side_x = 20
 
@@ -165,28 +177,34 @@ class CardGame:
                                 r, c = Index_Card_Image(card)
                                 self.CardSet.cards[r * 13 + c].blitmehere(self.side_x, self.side_y)
                                 self.side_y += 12
-                                time.sleep(0.1)
+                                time.sleep(0.3)
                                 pygame.display.flip()
-                            time.sleep(0.1)
+                            time.sleep(0.4)
                             self.screen.fill(self.settings.bg_color, (400, 700, 300, 50))
                             pygame.display.flip()
                             print(len(Cards_52))
                             break
+
+                        self.screen.fill(self.settings.bg_color, (self.side_x, self.side_y, 100, 12))
+                        if i == 51:
+                            self.screen.fill(self.settings.bg_color, (self.side_x, self.side_y, 100, 200))
+                            self.card_transition(Cards_52[i], self.side_x, self.side_y)
+                            self.side_x = 20
+
+                            self.side_y = 10
+                        else:
+                            self.card_transition(Cards_52[i], self.side_x, self.side_y)
 
                         r, c = Index_Card_Image(Cards_52[i])
                         self.CardSet.cards[r * 13 + c].blitmehere(x, y)
                         pygame.display.flip()
                         temp_stack.append(Cards_52[i])
 
-                        self.screen.fill(self.settings.bg_color, (self.side_x, self.side_y, 100, 12))
-                        if i == 51:
-                            self.screen.fill(self.settings.bg_color, (self.side_x, self.side_y, 100, 200))
-
                         pygame.display.flip()
                         cards_printed += 1
 
                         if j == num_on_card:
-                            time.sleep(0.1)
+                            time.sleep(0.5)
 
                         time.sleep(0.05)
 
@@ -194,7 +212,7 @@ class CardGame:
 
                         i += 1
                         y += 12
-                        time.sleep(0.01)
+                        time.sleep(0.3)
                         cards_taken += 1
 
                         if j == 13:
@@ -205,7 +223,7 @@ class CardGame:
                             x, y = self.draws[stacks]
                             self.screen.fill(self.settings.bg_color, (x, y, 100, 300))
                             pygame.display.flip()
-                            time.sleep(0.01)
+                            time.sleep(0.2)
                             for k in temp_stack:
                                 r, c = Index_Card_Image(k)
                                 # displaying it back-side
@@ -492,6 +510,21 @@ class CardGame:
             hidden_stack = [1, 2, 3]
 
             for select in selects:
+
+                while True:
+                    to_break = False
+                    for event in pygame.event.get():
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.QUIT:
+                                sys.exit()
+                            if event.key == pygame.K_KP_ENTER:
+                                to_break = True
+                                break
+                    if to_break:
+                        break
+
+                        # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                 print('  ; ' + str(len(three_stacks[select - 1])))
                 if select == 1:
                     hidden_stack.remove(1)
@@ -505,7 +538,7 @@ class CardGame:
                     here_x = pos_x_1st_stack
                     here_y = pos_y_1st_stack + 30
 
-                    time.sleep(1.2)
+                    time.sleep(0.5)
 
                     number = number_on_card(c)
                     for card_number in range(0, number):
@@ -532,6 +565,8 @@ class CardGame:
                     here_x = pos_x_2nd_stack
                     here_y = pos_y_2nd_stack + 30
 
+                    time.sleep(0.5)
+
                     number = number_on_card(c)
                     for card_number in range(0, number):
                         self.screen.fill(self.settings.bg_color, pygame.Rect(side_x, side_y, 100, 12))
@@ -556,6 +591,8 @@ class CardGame:
 
                     here_x = pos_x_3rd_stack
                     here_y = pos_y_3rd_stack + 30
+
+                    time.sleep(0.5)
 
                     number = number_on_card(c)
                     for card_number in range(0, number):
@@ -584,6 +621,22 @@ class CardGame:
             str_x = here_x + 10
             str_y = here_y + 150
             for card_number in range(10):
+
+                # ENTER- listener
+                while True:
+                    to_break = False
+                    for event in pygame.event.get():
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.QUIT:
+                                sys.exit()
+                            if event.key == pygame.K_KP_ENTER:
+                                to_break = True
+                                break
+                    if to_break:
+                        break
+
+                        # we have made 5 selections now, ALSO CARD IS IN STACK - 5
+
                 self.screen.fill(self.settings.bg_color, pygame.Rect(side_x, side_y, 100, 12))
                 pygame.display.flip()
                 side_y += 12
@@ -592,12 +645,12 @@ class CardGame:
                 self.CardSet.cards[r * 13 + c].blitmehere(here_x, here_y)
                 pygame.display.flip()
                 here_x += 25
-                time.sleep(0.1)
+                time.sleep(0.5)
                 index_card_52 += 1
                 txt = font2.render(s[idx], True, (255, 10, 20))
                 self.screen.blit(txt, (str_x, str_y))
                 pygame.display.flip()
-                str_x += 25
+                str_x += 30
                 idx += 1
 
             here_x = pos_x_3rd_stack + 150
@@ -609,7 +662,7 @@ class CardGame:
             total_card = 0
 
             for card_number in range(0, number):
-                if card_number == number-1:
+                if card_number == number - 1:
                     self.screen.fill(self.settings.bg_color, pygame.Rect(side_x, side_y, 100, 200))
                 self.screen.fill(self.settings.bg_color, pygame.Rect(side_x, side_y, 100, 12))
                 pygame.display.flip()
@@ -620,7 +673,7 @@ class CardGame:
                 pygame.display.flip()
                 here_y += 30
                 index_card_52 += 1
-                time.sleep(0.1)
+                time.sleep(0.5)
                 total_card += 1
 
             while True:

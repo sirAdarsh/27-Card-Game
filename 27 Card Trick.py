@@ -305,6 +305,7 @@ class CardGame:
             if event.type == pygame.QUIT:
                 sys.exit()
 
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 pos = 0
@@ -323,7 +324,7 @@ class CardGame:
                     pos += 1
             elif event.type == pygame.KEYDOWN:
 
-                if event.key == pygame.K_q:
+                if event.type == pygame.QUIT:
                     sys.exit()
 
                 # When pressed Enter, the card display starts
@@ -490,7 +491,7 @@ class CardGame:
                 x = x_third
             for i in range(9):
 
-                time.sleep(0.2)
+                time.sleep(0.4)
                 self.screen.fill(self.settings.bg_color, pygame.Rect(x, 20, 100, del_y))
                 del_y += 50
                 if i == 7:
@@ -501,10 +502,9 @@ class CardGame:
                 pygame.display.flip()
 
                 # TO_DO: add a part to remove the selected column
-            time.sleep(0.2)
+            time.sleep(0.4)
 
 
-            time.sleep(0.2)
             pygame.display.flip()
 
             if self.first_column == 2:
@@ -516,9 +516,8 @@ class CardGame:
             del_y = 50
             for i in range(9, 18):
 
-                time.sleep(0.2)
+                time.sleep(0.4)
                 self.screen.fill(self.settings.bg_color, pygame.Rect(x, 20, 100, del_y))
-                time.sleep(0.2)
                 del_y += 50
                 if i == 16:
                     del_y += 300
@@ -527,10 +526,9 @@ class CardGame:
                 space += 25
                 pygame.display.flip()
 
-            time.sleep(0.2)
+            time.sleep(0.4)
 
 
-            time.sleep(0.2)
             pygame.display.flip()
 
             del_y = 50
@@ -541,9 +539,8 @@ class CardGame:
             else:
                 x = x_third
             for i in range(18, 27):
-                time.sleep(0.2)
+                time.sleep(0.4)
                 self.screen.fill(self.settings.bg_color, pygame.Rect(x, 20, 100, del_y))
-                time.sleep(0.2)
                 del_y += 50
                 if i == 25:
                     del_y += 300
@@ -551,9 +548,8 @@ class CardGame:
                 self.CardSet.cards[r * 13 + c].blitmehere(10, space)
                 space += 25
                 pygame.display.flip()
-                time.sleep(0.2)
 
-            time.sleep(0.2)
+            time.sleep(0.4)
 
 
             col1.clear()

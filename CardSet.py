@@ -1,4 +1,4 @@
-"""Module to represent a chess set, and individual pieces."""
+"""Module to represent a cards set, and individual pieces."""
 
 from CardSheet import CardSheet
 
